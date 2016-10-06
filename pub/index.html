@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Angular 1 demo app</title>
+
+    <script src="/libs/angular.min.js"></script>
+    <script src="/libs/jquery.min.js"></script>
+    <script src="/libs/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/styles/bootstrap.min.css"></style>
+    <link rel="stylesheet" href="/styles/bootstrap-theme.min.css"></style>
+  </head>
+  <body>
+    <div ng-app="myApp" ng-controller="myAppCtrl">
+      <h1>My Angular 1 demo</h1>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-1 col-sm-1 col-md-1"></div>
+          <div class="col-xs-10 col-sm-10 col-md-10">
+            <div class="alert alert-info" role="alert" ng-show="messages.length > 0">
+              <div ng-repeat="message in messages">
+                {{ message }}
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="newContact.name">Name</label>
+              <input type="text" id="newContact.name" ng-model="newContact.name" class="form-control" placeholder="Your name goes here" required>
+
+              <label for="newContact.telephone">Telephone</label>
+              <input type="telephone" id="newContact.telephone" ng-model="newContact.telephone" class="form-control" placeholder="Your telephone number" required>
+
+              <br />
+              <input type="button" value="Register" class="btn btn-primary" ng-click="saveContact()">
+          </div>
+            <div class="col-xs-1 col-sm-1 col-md-1"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-1 col-sm-1 col-md-1"></div>
+          <div class="col-xs-10 col-sm-10 col-md-10">
+            <table class="table" ng-show="myContacts.length > 0">
+              <thead>
+                <tr>
+                  <td>Id</td>
+                  <td>Name</td>
+                  <td>Telephone</td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="contact in myContacts">
+                  <td>{{ contact._id }}</td>
+                  <td>
+                    <div ng-show="!contact.isEditing">
+                      {{ contact.name }}
+                    </div>
+                    <input type="text" class="form-control" ng-show="contact.isEditing" ng-model="contact.name"></input>
+                  </td>
+                  <td>
+                    <div ng-show="!contact.isEditing">
+                      {{ contact.telephone }}
+                    </div>
+                    <input type="text" class="form-control" ng-show="contact.isEditing" ng-model="contact.telephone"></input>
+                  </td>
+                  <td>
+                    <input type="button" value="Edit" class="btn btn-info" ng-click="editContact(contact)" ng-hide="contact.isEditing">
+                    <input type="button" value="Cancel" class="btn btn-default" ng-click="cancelUpdate(contact)" ng-show="contact.isEditing">
+                    <input type="button" value="Update" class="btn btn-info" ng-click="updateContact(contact)" ng-show="contact.isEditing">
+                    <input type="button" value="Remove" class="btn btn-danger" ng-click="removeContact(contact._id)">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+            <div class="col-xs-1 col-sm-1 col-md-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/app/main.js"></script>
+  </body>
+</html>
